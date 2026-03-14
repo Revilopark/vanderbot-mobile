@@ -1,0 +1,5 @@
+# Copy this to local.properties and fill in your keys
+# DO NOT commit local.properties to git
+
+CLAUDE_API_KEY=sk-ant-xxxxx
+GITHUB_TOKEN=ghp_xxxxx

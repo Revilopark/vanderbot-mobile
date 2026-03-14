@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ink_dark">#FF0A0E1A</color>
+    <color name="ink_surface">#FF12162A</color>
+    <color name="ink_green">#FF00FF88</color>
+</resources>
