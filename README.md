@@ -1,65 +1,62 @@
-# VanderBot Mobile 🐘
+# Vanderbot 2.0 - Mobile UI
 
-Native Android client for Oliver's AI workspace. Chat with Claude, create documents, build web pages, publish to GitHub Pages — all from your phone.
+AI-native practicum OS for learning-by-building. Mobile-first responsive PWA.
 
 ## Features
 
-| Feature | Status |
-|---|---|
-| Streaming Claude chat | ✅ |
-| Conversation history (Room DB) | ✅ |
-| Image upload + vision analysis | ✅ |
-| Document creation & editing | ✅ |
-| Pitch deck generation | ✅ |
-| Web page builder | ✅ |
-| Publish to GitHub Pages | ✅ |
-| File manager with versioning | ✅ |
-| Google Drive sync | 🔜 Scaffolded |
+- **Home / Command Center** - Resume work, active projects, open decisions, recent artifacts
+- **Projects** - Project workspace with progress tracking
+- **Chat** - Conversational AI with memory disclosure
+- **Create** - Artifact generation hub
+- **Files** - Project knowledge base
+- **IAM Awareness Panel** - Bottom sheet for context disclosure
 
-## Setup
+## Design System
 
-1. Open in Android Studio (Hedgehog+)
-2. Copy `local.properties.example` → `local.properties`
-3. Add your API keys:
-   ```
-   CLAUDE_API_KEY=sk-ant-xxxxx
-   GITHUB_TOKEN=ghp_xxxxx
-   ```
-4. Build & run
+- Dark mode first (deep navy/graphite base)
+- Electric violet accent (#6366f1)
+- High contrast text hierarchy
+- Mobile-optimized tap targets
+- Safe area support for iOS/Android
+
+## Tech Stack
+
+- Next.js 16 + React + TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- Lucide Icons
+- PWA ready
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Static export goes to `dist/` folder.
+
+## Screens
+
+| Screen | Description |
+|--------|-------------|
+| Home | Command center with resume card, mode chips, active projects |
+| Projects | Project list with progress bars and metadata |
+| Chat | Conversational interface with memory sources |
+| Create | Artifact type selector and quick create |
+| Files | File upload and project knowledge base |
 
 ## Architecture
 
-```
-vanderbot-mobile/
-├── app/src/main/java/com/inkwell/vanderbot/
-│   ├── VanderBotApp.kt          # Hilt application
-│   ├── di/AppModule.kt          # Dependency injection
-│   ├── data/
-│   │   ├── api/ClaudeApi.kt     # Claude streaming + vision
-│   │   └── api/GitHubApi.kt     # GitHub Pages publish
-│   │   └── db/VanderBotDatabase.kt  # Room (conversations, messages, documents)
-│   └── ui/
-│       ├── MainActivity.kt      # Navigation + bottom bar
-│       ├── theme/Theme.kt       # Inkwell dark palette
-│       ├── screen/HomeScreen.kt  # Dashboard
-│       ├── screen/ChatScreen.kt  # Streaming chat
-│       ├── screen/FilesScreen.kt # Document manager
-│       └── viewmodel/           # State management
-```
-
-## Stack
-
-- **UI**: Jetpack Compose + Material 3
-- **DI**: Hilt
-- **DB**: Room (SQLite)
-- **Network**: OkHttp + SSE streaming
-- **Images**: Coil
-- **API**: Claude (Anthropic) + GitHub REST
-
-## Design
-
-Inkwell dark theme matching ontological-theatre aesthetic:
-- Background: `#0A0E1A`
-- Cards: `#1A1F35` with glass effect
-- Primary: `#00FF88` (green)
-- Accent: `#4FACFE` (blue), `#AA66FF` (purple), `#00D4FF` (cyan)
+Based on Vanderbot 2.0 Master Spec:
+- Private by default
+- Project-first organization
+- Memory visibility and sourcing
+- Action approval flows
+- Rights & provenance ready
