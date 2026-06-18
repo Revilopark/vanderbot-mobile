@@ -1,10 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  distDir: 'dist',
-  assetPrefix: '/vanderbot-mobile',
-  basePath: '/vanderbot-mobile',
+  output: 'standalone',
   images: {
     unoptimized: true,
   },
