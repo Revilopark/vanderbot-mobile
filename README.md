@@ -60,3 +60,4 @@ Based on Vanderbot 2.0 Master Spec:
 - Memory visibility and sourcing
 - Action approval flows
 - Rights & provenance ready
+# Deploy trigger - 2026-06-18-12:45:52
