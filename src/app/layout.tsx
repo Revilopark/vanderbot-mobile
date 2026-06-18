@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Vanderbot 2.0",
   description: "AI-native practicum OS for learning-by-building",
-  manifest: "/manifest.json",
+  manifest: "/vanderbot-mobile/manifest.json",
 };
 
 export const viewport: Viewport = {
@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-background text-text-primary">
+    <html lang="en" style={{ backgroundColor: '#0a0e1a' }}>
+      <body style={{ backgroundColor: '#0a0e1a', color: '#f1f5f9', minHeight: '100vh' }}>
         {children}
       </body>
     </html>

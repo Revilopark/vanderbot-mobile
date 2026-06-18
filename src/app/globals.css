@@ -20,12 +20,13 @@
     --info: #3b82f6;
   }
 
-  body {
-    background-color: var(--background);
-    color: var(--text-primary);
+  html, body {
+    background-color: #0a0e1a !important;
+    color: #f1f5f9 !important;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
   }
 
   /* Custom scrollbar */
