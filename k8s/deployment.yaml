@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vanderbot-app
+  namespace: vanderbot
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vanderbot
+  template:
+    metadata:
+      labels:
+        app: vanderbot
+    spec:
+      containers:
+      - name: app
+        image: gcr.io/vanderbot-2/vanderbot:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: IAM_MCP_URL
+          value: "https://iam-mcp-xxx-uc.a.run.app/sse"
+        - name: MCP_CLIENT_URL
+          value: "http://vanderbot-mcp:8080"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: vanderbot-secrets
+              key: database-url
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vanderbot
+  namespace: vanderbot
+spec:
+  selector:
+    app: vanderbot
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vanderbot-mcp
+  namespace: vanderbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vanderbot-mcp
+  template:
+    metadata:
+      labels:
+        app: vanderbot-mcp
+    spec:
+      containers:
+      - name: mcp
+        image: gcr.io/vanderbot-2/vanderbot-mcp:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: IAM_MCP_URL
+          value: "https://iam-mcp-xxx-uc.a.run.app/sse"
+        - name: PORT
+          value: "8080"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vanderbot-mcp
+  namespace: vanderbot
+spec:
+  selector:
+    app: vanderbot-mcp
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vanderbot
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vanderbot-secrets
+  namespace: vanderbot
+type: Opaque
+stringData:
+  database-url: "postgresql://trinity:PASSWORD@localhost/trinity_graph"

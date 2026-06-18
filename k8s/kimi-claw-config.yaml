@@ -1,0 +1,95 @@
+# Vanderbot 2.0 - Kimi Bot Claw Agent Configuration
+# This configures the OpenClaw agent to work with the Trinity Graph
+
+name: vanderbot-claw
+version: 2.0.0
+
+# ─── Agent Configuration ───────────────────────────────────────────
+
+agent:
+  name: "Vanderbot Claw"
+  description: "AI-native practicum OS agent for learning-by-building"
+  model: kimi-coding/k2p6
+  
+  # Memory configuration
+  memory:
+    type: trinity-graph
+    url: ${TRINITY_GRAPH_URL}
+    scope: project
+    
+  # IAM integration
+  iam:
+    mcp_url: ${IAM_MCP_URL}
+    check_permissions: true
+    default_visibility: private
+
+# ─── Tools ─────────────────────────────────────────────────────────
+
+tools:
+  # MCP Tools (via IAM)
+  - name: get_user_context
+    description: "Get current user's IAM context"
+    endpoint: ${IAM_MCP_URL}
+    
+  - name: check_permission
+    description: "Check if user has permission for action"
+    endpoint: ${IAM_MCP_URL}
+    
+  - name: create_artifact
+    description: "Create a new artifact in the project"
+    endpoint: ${MCP_CLIENT_URL}/mcp/create_artifact
+    
+  - name: search_memory
+    description: "Search project memory"
+    endpoint: ${MCP_CLIENT_URL}/mcp/search_memory
+
+  # Trinity Graph Tools
+  - name: graph_query
+    description: "Query the Trinity knowledge graph"
+    endpoint: ${TRINITY_GRAPH_URL}/query
+    
+  - name: graph_mutate
+    description: "Add nodes/edges to the Trinity graph"
+    endpoint: ${TRINITY_GRAPH_URL}/mutate
+
+# ─── Workflows ─────────────────────────────────────────────────────
+
+workflows:
+  # Chat workflow
+  chat:
+    steps:
+      - check_iam_context
+      - load_project_memory
+      - process_message
+      - store_interaction
+      
+  # Create artifact workflow
+  create:
+    steps:
+      - check_permissions
+      - validate_input
+      - generate_artifact
+      - store_in_graph
+      - update_project_state
+      
+  # Research workflow
+  research:
+    steps:
+      - identify_sources
+      - gather_data
+      - synthesize_findings
+      - create_memo
+      - link_to_project
+
+# ─── Channels ──────────────────────────────────────────────────────
+
+channels:
+  - type: web
+    url: ${APP_URL}
+    
+  - type: mcp
+    url: ${IAM_MCP_URL}
+    
+  - type: internal
+    name: trinity-graph
+    url: ${TRINITY_GRAPH_URL}
