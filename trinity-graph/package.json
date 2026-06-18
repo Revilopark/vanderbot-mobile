@@ -1,0 +1,16 @@
+{
+  "name": "trinity-graph",
+  "version": "1.0.0",
+  "description": "Trinity Graph - Knowledge graph for Vanderbot",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.0",
+    "neo4j-driver": "^5.15.0"
+  }
+}
