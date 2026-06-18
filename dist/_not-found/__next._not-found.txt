@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[62021,["/_next/static/chunks/3tfe3a2imedbv.js"],"default"]
-3:I[2245,["/_next/static/chunks/3tfe3a2imedbv.js"],"default"]
+2:I[62021,["/vanderbot-mobile/_next/static/chunks/3tfe3a2imedbv.js"],"default"]
+3:I[2245,["/vanderbot-mobile/_next/static/chunks/3tfe3a2imedbv.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"5CckjIFDCB7wtsShuAqCI"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"94nos8woUN5v3zzTtjgiw"}
